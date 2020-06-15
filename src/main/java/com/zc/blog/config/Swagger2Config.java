@@ -34,7 +34,7 @@ public class Swagger2Config {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("blog后台接口演示")
-                .description("vote")
+                .description("blog")
                 .contact("zc")
                 .version("1.0")
                 .build();
