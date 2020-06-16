@@ -2,21 +2,28 @@ package com.zc.blog.mbg.model;
 
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class MBlog implements Serializable {
+    @ApiModelProperty(value = "博客id")
     private Long id;
 
+    @ApiModelProperty(value = "用户id")
     private Long userId;
 
+    @ApiModelProperty(value = "标题")
     private String title;
 
+    @ApiModelProperty(value = "描述")
     private String description;
 
-    private Date created;
+    @ApiModelProperty(value = "创建时间")
+    private LocalDateTime created;
 
+    @ApiModelProperty(value = "状态")
     private Byte status;
 
+    @ApiModelProperty(value = "内容")
     private String content;
 
     private static final long serialVersionUID = 1L;
@@ -53,11 +60,11 @@ public class MBlog implements Serializable {
         this.description = description;
     }
 
-    public Date getCreated() {
+    public LocalDateTime getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(LocalDateTime created) {
         this.created = created;
     }
 
