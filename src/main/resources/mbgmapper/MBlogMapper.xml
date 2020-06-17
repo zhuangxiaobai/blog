@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zc.blog.mbg.mapper.MBlogMapper">
-  <resultMap id="BaseResultMap" type="com.zc.blog.mbg.model.MBlog">
+  <resultMap id="BaseResultMap" type="com.zc.blog.mbg.po.MBlog">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="title" jdbcType="VARCHAR" property="title" />
@@ -9,7 +9,7 @@
     <result column="created" jdbcType="TIMESTAMP" property="created" />
     <result column="status" jdbcType="TINYINT" property="status" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zc.blog.mbg.model.MBlog">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zc.blog.mbg.po.MBlog">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -30,7 +30,7 @@
     delete from m_blog
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.zc.blog.mbg.model.MBlog">
+  <insert id="insert" parameterType="com.zc.blog.mbg.po.MBlog">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -41,7 +41,7 @@
       #{created,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, #{content,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.zc.blog.mbg.model.MBlog">
+  <insert id="insertSelective" parameterType="com.zc.blog.mbg.po.MBlog">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -87,7 +87,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zc.blog.mbg.model.MBlog">
+  <update id="updateByPrimaryKeySelective" parameterType="com.zc.blog.mbg.po.MBlog">
     update m_blog
     <set>
       <if test="userId != null">
@@ -111,7 +111,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zc.blog.mbg.model.MBlog">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zc.blog.mbg.po.MBlog">
     update m_blog
     set user_id = #{userId,jdbcType=BIGINT},
       title = #{title,jdbcType=VARCHAR},
@@ -121,7 +121,7 @@
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zc.blog.mbg.model.MBlog">
+  <update id="updateByPrimaryKey" parameterType="com.zc.blog.mbg.po.MBlog">
     update m_blog
     set user_id = #{userId,jdbcType=BIGINT},
       title = #{title,jdbcType=VARCHAR},

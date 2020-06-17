@@ -3,7 +3,18 @@
 <mapper namespace="com.zc.blog.mapper.MBlogExtMapper">
 
 
-    <select id="aaa"   resultMap="com.zc.blog.mbg.mapper.MBlogMapper.BaseResultMap" ></select>
+    <!--<select id="aaa"   resultMap="com.zc.blog.mbg.mapper.MBlogMapper.BaseResultMap" ></select>-->
 
+    <insert id="insertNoId" parameterType="com.zc.blog.mbg.po.MBlog">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into m_blog (user_id,title, description,
+        created, status, content
+        )
+        values (#{userId,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
+        #{created,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, #{content,jdbcType=LONGVARCHAR}
+        )
+    </insert>
 
 </mapper>

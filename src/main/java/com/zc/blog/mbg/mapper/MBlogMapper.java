@@ -1,6 +1,6 @@
 package com.zc.blog.mbg.mapper;
 
-import com.zc.blog.mbg.model.MBlog;
+import com.zc.blog.mbg.po.MBlog;
 
 public interface MBlogMapper {
     int deleteByPrimaryKey(Long id);

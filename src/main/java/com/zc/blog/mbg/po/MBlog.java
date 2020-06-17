@@ -1,4 +1,4 @@
-package com.zc.blog.mbg.model;
+package com.zc.blog.mbg.po;
 
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
@@ -21,7 +21,7 @@ public class MBlog implements Serializable {
     private LocalDateTime created;
 
     @ApiModelProperty(value = "状态")
-    private Byte status;
+    private Integer status;
 
     @ApiModelProperty(value = "内容")
     private String content;
@@ -68,11 +68,11 @@ public class MBlog implements Serializable {
         this.created = created;
     }
 
-    public Byte getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

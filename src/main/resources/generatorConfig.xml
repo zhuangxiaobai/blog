@@ -49,9 +49,9 @@
             <property name="useJSR310Types" value="true"/>
         </javaTypeResolver>
         <!--指定生成model的路径-->
-        <javaModelGenerator targetPackage="com.zc.blog.mbg.model" targetProject="./src/main/java"/>
+        <javaModelGenerator targetPackage="com.zc.blog.mbg.po" targetProject="./src/main/java"/>
         <!--指定生成mapper.xml的路径-->
-        <sqlMapGenerator targetPackage="mbgmapper" targetProject="./src/main/resources"/>
+        <sqlMapGenerator targetPackage="mbgMapper" targetProject="./src/main/resources"/>
         <!--指定生成mapper接口的的路径-->
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.zc.blog.mbg.mapper"
                              targetProject="./src/main/java"/>
