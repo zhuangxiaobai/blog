@@ -1,10 +1,14 @@
 package com.zc.blog.controller;
 
 import cn.hutool.core.bean.BeanUtil;
+import com.github.pagehelper.IPage;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.zc.blog.api.CommonResult;
 
 import com.zc.blog.entity.dto.BlogDto;
 
+import com.zc.blog.entity.vo.BlogVo;
 import com.zc.blog.mbg.po.MBlog;
 import com.zc.blog.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,30 +16,46 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
-@RequestMapping("/blog")
+@RequestMapping("/blogs")
 public class BlogController {
     @Autowired
     private BlogService blogService;
 
-//    @GetMapping("/blog/blogLists")
-//    public CommonResult listBlog(@RequestParam Integer currentPage,@RequestParam Integer pageSize) {
-//
-//        //Page page = new Page(currentPage, pageSize);
-//        //IPage pageData = blogService.getBlogs();
-//
-//       // return CommonResult.success();
-//    }
+    @GetMapping("/blogLists")
+    public CommonResult listBlog(@RequestParam Integer currentPage,@RequestParam Integer pageSize) {
 
 
-//    @GetMapping("/blog/{id}")
-//    public CommonResult detail(@PathVariable(name = "id") Long id) {
-//        Blog blog = blogService.getById(id);
-//
-//
-//        return CommonResult.success(blog);
-//    }
+       /* List<MBlog> blogLists= blogService.getBlogLists(currentPage,pageSize);
+        List<BlogVo> blogVos = new ArrayList<>();
+        for(MBlog mBlog:blogLists){
+            BlogVo blogVo = new BlogVo();
+
+            BeanUtil.copyProperties(mBlog,blogVo);
+
+            blogVos.add(blogVo);
+
+        }*/
+        PageInfo  blogPageInfo= (PageInfo) blogService.getBlogLists(currentPage,pageSize);
+
+        return CommonResult.success(blogPageInfo);
+    }
+
+
+    @GetMapping("/{id}")
+    public CommonResult detail(@PathVariable(name = "id") Long id) {
+        MBlog mBlog = blogService.getBlogById(id);
+
+        BlogVo blogVo = new BlogVo();
+
+        BeanUtil.copyProperties(mBlog,blogVo);
+
+
+        return CommonResult.success(blogVo);
+    }
 //
 //    @DeleteMapping("/blog/delete/{id}")
 //    public CommonResult deleteBlog(@PathVariable(name = "id") Long id) {
@@ -69,7 +89,10 @@ public class BlogController {
         if(blogDto.getId() != null) {
         //修改
 
-
+            blog = new MBlog();
+            blog.setId(blogDto.getId());
+            blog.setUserId(1L);
+           // blog.setCreated(LocalDateTime.now());
 
 
 
@@ -86,6 +109,7 @@ public class BlogController {
         }
 
         BeanUtil.copyProperties(blogDto, blog, "id", "userId", "created", "status");
+        System.out.println("传入的修改参数"+blog.toString());
         int success   = blogService.createOrUpdate(blog);
 
         if(success == 1){
