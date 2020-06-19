@@ -16,9 +16,9 @@ import java.util.List;
 @Service
 public class BlogServiceImpl implements BlogService {
 
-    @Autowired
-    @Qualifier("MBlogMapper")
-    private MBlogMapper blogMapper;
+//    @Autowired
+//    @Qualifier("MBlogMapper")
+//    private MBlogMapper blogMapper;
     @Autowired
     @Qualifier("MBlogExtMapper")
     private MBlogExtMapper blogExtMapper;
@@ -31,14 +31,14 @@ public class BlogServiceImpl implements BlogService {
         if(blog.getId() == null){
          //添加
           //  success = blogExtMapper.insertNoId(blog);
-            success = blogMapper.insertSelective(blog);
+            success = blogExtMapper.insertSelective(blog);
 
 
 
         }else{
          //修改
 
-            success = blogMapper.updateByPrimaryKeySelective(blog);
+            success = blogExtMapper.updateByPrimaryKeySelective(blog);
 
 
         }
@@ -60,6 +60,6 @@ public class BlogServiceImpl implements BlogService {
     public MBlog getBlogById(Long id) {
 
 
-        return blogMapper.selectByPrimaryKey(id);
+        return blogExtMapper.selectByPrimaryKey(id);
     }
 }
